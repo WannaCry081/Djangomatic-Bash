@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
 
+init_django() {
+
+}
 
 main() {
 
@@ -16,6 +19,7 @@ main() {
             fi
         fi
     done
+
 
 
 }
