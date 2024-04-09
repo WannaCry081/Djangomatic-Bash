@@ -5,6 +5,12 @@ init_django() {
 
 }
 
+
+init_git() {
+
+}
+
+
 main() {
 
     until [ -n "$project_name" ]; do
