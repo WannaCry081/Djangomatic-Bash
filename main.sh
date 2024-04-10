@@ -39,6 +39,33 @@ usage() {
 
 init_django_mvt() {
     
+    local app_path="$1/app"
+    local static_path="$1/static"
+    local template_path="$1/templates"
+
+    local app_directories=(
+        "views" "models" "admin" 
+        "forms" "tests"
+    )
+
+    django-admin startapp app || exit 1
+    cd "$app_path" || exit 1
+
+    rm "tests.py" "views.py" "admin.py" "models.py" || exit 1
+    touch urls.py || exit 1
+
+    for directory in "${app_directories[@]}"; do 
+        mkdir "$app_path/$directory" && cd "$app_path/$directory" || exit 1
+        touch "__init__.py" || exit 1
+    done
+        
+    cd "$app_path" || exit 1
+    mkdir "$template_path" || exit 1
+    touch "$template_path/base.html"
+    
+    cd "$app_path" || exit 1
+    mkdir "$static_path" || exit 1
+    mkdir "$static_path/js" "$static_path/css" "$static_path/images" || exit 1 
 }
 
 
