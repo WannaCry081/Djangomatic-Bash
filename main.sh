@@ -29,6 +29,8 @@ init_django() {
 
     pip freeze > requirements.txt || exit 1
     touch README.md .gitignore .dockerignore Dockerfile || exit 1
+
+    echo -e "*.db\n*.sqlite3\n**/__pycache\n/venv" > .gitignore || exit 1
     
     django-admin startproject config . || exit 1
     cd "$config_path" || exit 1
@@ -49,6 +51,7 @@ init_django() {
         touch "__init__.py" || exit 1
     done
 
+    cd "$root_dir" || exit 1
     deactivate
 }
 
@@ -73,10 +76,7 @@ main() {
         fi
     done
 
-
-    project_path="$(pwd)/$project_name"
-    
-
+    local project_path="$(pwd)/$project_name"
 
     init_django "$project_path"
 
