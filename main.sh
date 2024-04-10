@@ -37,6 +37,11 @@ usage() {
 }
 
 
+init_django_mvt() {
+    
+}
+
+
 init_django_rest() { 
     local root_dir="$1"
 
