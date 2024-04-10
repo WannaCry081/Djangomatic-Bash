@@ -151,40 +151,20 @@ main() {
             fi
 
             if [ "$r_flag" ]; then  
-                if [ "$m_flag" ]; then 
-
-                else 
-
+                init_django_rest "$m_flag" "$project_name"
+                if [ "$g_flag" ] || [ "$p_flag" ]; then 
+                    init_git "$p_flag" "$repository_link"
                 fi
-
-                if [ "$g_flag" ]; then 
-
-                fi
-
-                if [ "$p_flag" ]; then 
-
-                fi
-
                 continue
-            done
+            fi
 
             if [ "$n_flag" ]; then 
-                if [ "$m_flag" ]; then 
-
-                else 
-                
+                init_django_ninja "$m_flag" "$project_name"
+                if [ "$g_flag" ] || [ "$p_flag" ]; then 
+                    init_git "$p_flag" "$repository_link"
                 fi
-
-                if [ "$g_flag" ]; then 
-
-                fi
-
-                if [ "$p_flag" ]; then 
-
-                fi
-
                 continue
-            done
+            fi
 
         elif [ -n "$command" ]; then
             if [ "$command" = "exit" ]; then 
