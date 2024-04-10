@@ -199,6 +199,16 @@ main() {
 
     # Loop to continuously process user input
     while [ true ]; do
+
+        unset h_flag
+        unset m_flag
+        unset n_flag
+        unset r_flag
+        unset g_flag
+        unset p_flag
+        unset project_name
+        unset repository_link
+        
         read -p "$cmd_line > " command args
 
         # Process 'django' command
