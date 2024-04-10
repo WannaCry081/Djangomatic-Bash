@@ -18,11 +18,12 @@ usage() {
 		${GREEN}╺┳┓ ┏┏━┓┏┓╻┏━┓┏━┓${WHITE}┏┳┓┏━┓┏┳┓╻┏━╸
 		${GREEN} ┃┃ ┃┣━┫┃┗┫┃ ┓┃ ┃${WHITE}┃┃┃┣━┫ ┃ ┃┃  
 		${GREEN}╺┻┛┗┛╹ ╹╹ ╹┗━┛┗━┛${WHITE}╹ ╹╹ ╹ ╹ ╹┗━╸
-		
+
 		Djangomatic V1.0 : Generate Django project structure.
 		Developed By     : Lirae Que Data (@WannaCry081)
-			
-		Usage : django [-h] [-m] [-r | -n] [project_name] [-g | -p] [repository_link]
+
+		Usage: django [-h] [-m (optional)] [-r | -n] [project_name] 
+                      [-g | -p (optional)] [repository_link (optional)]
 
 		Options:
 		   -h	Show this help message
@@ -31,14 +32,15 @@ usage() {
 		   -r	Use REST API for the project template
 		   -g	Initialize version control
 		   -p	Push project to a public repository
-		   
+
 	EOF
 
     cat <<- EOF
 		Examples: 
-		    django -r note_api     Create 'note_api' django API template
-		    django -m todo_app -g  Create 'todo_app' django MVT and initialize git
-		
+		    django -r note-app          Creates a django Rest API template
+		    django -m -n ecommerce -g   Creates a django MVT + Ninja and initialize git
+		    django -r todolist -p link  Creates a django Rest API and update github repo
+
 
 	EOF
 }
@@ -64,11 +66,11 @@ init_django_mvt() {
         mkdir "$app_path/$directory" && cd "$app_path/$directory" || exit 1
         touch "__init__.py" || exit 1
     done
-        
+
     cd "$app_path" || exit 1
     mkdir "$template_path" || exit 1
     touch "$template_path/base.html"
-    
+
     cd "$app_path" || exit 1
     mkdir "$static_path" || exit 1
     mkdir "$static_path/js" "$static_path/css" "$static_path/images" || exit 1 
@@ -77,7 +79,6 @@ init_django_mvt() {
 
 init_django() {
     local root_dir="$(pwd)/$2"
-
     local venv_path="$root_dir/venv"
     local api_path="$root_dir/api"
     local v1_path="$api_path/v1"
@@ -98,7 +99,7 @@ init_django() {
     touch README.md .gitignore .dockerignore Dockerfile || exit 1
 
     echo -e "*.db\n*.sqlite3\n**/__pycache\n/venv" > .gitignore || exit 1
-    
+
     django-admin startproject config . || exit 1
     cd "$config_path" || exit 1
 
@@ -120,7 +121,6 @@ init_django() {
     done
 
     cd "$root_dir" || exit 1
-
     if [ "$1" = true ]; then 
         init_django_mvt "$root_dir"
     fi
@@ -145,7 +145,6 @@ main() {
     local cmd_line="${GREEN}djm${WHITE}"
 
     clear && usage
-
     while [ true ]; do
         read -p "$cmd_line > " command args
 
