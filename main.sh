@@ -24,14 +24,14 @@ usage() {
 		${GREEN} ┃┃ ┃┣━┫┃┗┫┃ ┓┃ ┃${WHITE}┃┃┃┣━┫ ┃ ┃┃  
 		${GREEN}╺┻┛┗┛╹ ╹╹ ╹┗━┛┗━┛${WHITE}╹ ╹╹ ╹ ╹ ╹┗━╸
 
-		Djangomatic V1.0 : Generate Django project structure.
+		Djangomatic v1.0 : Generate django project structure.
 		Developed By     : Lirae Que Data (@WannaCry081)
 
 		Usage: django [-h] [-m (optional)] [-r | -n] [project_name] 
                       [-g | -p (optional)] [repository_link (optional)]
 
 		Options:
-		   -h	Show this help message
+		   -h	Show the help view
 		   -n	Use Django Ninja instead of Django Rest Framework
 		   -m	Use MVT Architecture for the project template
 		   -r	Use REST API for the project template
@@ -44,7 +44,7 @@ usage() {
 		Examples: 
 		    django -r note-app          Creates a django Rest API template
 		    django -m -n ecommerce -g   Creates a django MVT + Ninja and initialize git
-		    django -r todolist -p link  Creates a django Rest API and update github repo
+		    django -r todolist -p link  Creates a django Rest API and push it to GitHub
 
 
 	EOF
