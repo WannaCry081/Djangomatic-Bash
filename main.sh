@@ -140,9 +140,13 @@ init_git() {
     git branch -M main
 
     if [ "$1" = true ]; then
-        echo "Pushing project to the repository..."
-        git remote add origin "$2"
-        git push -u origin main
+        if curl --output /dev/null --silent --head --fail "$2"; then
+            echo "Pushing project to the repository..."
+            git remote add origin "$2"
+            git push -u origin main
+        else
+            echo "Repository link does not exist or is inaccessible."
+        fi
     fi
 
     git checkout -b develop
