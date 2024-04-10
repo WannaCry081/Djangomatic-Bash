@@ -31,12 +31,14 @@ usage() {
                       [-g | -p (optional)] [repository_link (optional)]
 
 		Options:
-		   -h	Show the help view
+		   -h	Display the help view
+		   -m	Utilize the MVT (Model-View-Template)
+		        architecture for the project template
+
 		   -n	Use Django Ninja instead of Django Rest Framework
-		   -m	Use MVT Architecture for the project template
-		   -r	Use REST API for the project template
+		   -r	Utilize REST API for the project template
 		   -g	Initialize version control
-		   -p	Push project to a public repository
+		   -p	Push the project to a public repository
 
 	EOF
 
