@@ -85,7 +85,7 @@ init_django() {
     local config_path="$root_dir/config"
     local directories=($3)
 
-    echo "Initializing Django project. Please wait..."
+    echo -e "Initializing Django project. Please wait...\n"
 
     mkdir -p "$root_dir" && cd "$root_dir" || exit 1
 
@@ -126,13 +126,13 @@ init_django() {
     fi
 
     cd "$root_dir" || exit 1
-    echo "Project setup completed successfully. Happy coding!"
+    echo -e "\n${GREEN}Project setup completed successfully. Happy coding!${WHITE}"
     deactivate
 }
 
 
 init_git() {
-    echo "Initializing Git repository..."
+    echo -e "Initializing Git repository...\n"
 
     git init 
     git add . 
@@ -141,16 +141,16 @@ init_git() {
 
     if [ "$1" = true ]; then
         if curl --output /dev/null --silent --head --fail "$2"; then
-            echo "Pushing project to the repository..."
+            echo -e "\nPushing project to the repository...\n"
             git remote add origin "$2"
             git push -u origin main
         else
-            echo "Repository link does not exist or is inaccessible."
+            echo -e "\n${RED}Repository link does not exist or is inaccessible.${WHITE}"
         fi
     fi
 
     git checkout -b develop
-    echo "Git operations completed."
+    echo -e "\n${GREEN}Git operations completed.${WHITE}"
 }
 
 
@@ -231,7 +231,7 @@ main() {
 
         elif [ -n "$command" ]; then
             if [ "$command" = "exit" ]; then 
-                echo "Happy Hacking!"
+                echo "${GREEN}Happy Hacking!"
                 exit 0
             elif [ "$command" = "clear" ]; then 
                 clear 
