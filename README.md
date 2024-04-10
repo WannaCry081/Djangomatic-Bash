@@ -1,5 +1,7 @@
 # Djangomatic
 
+![Snapshot](./assets/snapshot.png)
+
 Djangomatic is an interactive command-line project structure generator for Django, designed to streamline the process of creating Django projects seamlessly without difficulties. With Djangomatic, users can quickly generate a Django project structure with ease.
 
 ## Features
