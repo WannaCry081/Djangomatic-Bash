@@ -11,6 +11,132 @@ Djangomatic is an interactive command-line project structure generator for Djang
 - Seamlessly create Django projects without manual setup.
 - Utilizes bash for efficient project creation.
 
+## Project Structures
+
+
+### DJango-Ninja Template
+
+```bash
+project_name
+│
+├── api
+│   ├── __init__.py
+│   └── v1
+│       ├── admin
+│       │   └── __init__.py
+│       ├── migrations
+│       │   └── __init__.py
+│       ├── models
+│       │   └── __init__.py
+│       ├── exceptions
+│       │   └── __init__.py
+│       ├── controllers
+│       │   └── __init__.py
+│       ├── tests
+│       │   └── __init__.py
+│       ├── utils
+│       │   └── __init__.py
+│       ├── services
+│       │   └── __init__.py
+│       ├── repositories
+│       │   └── __init__.py
+│       ├── __init__.py
+│       ├── urls.py
+│       └── apps.py         # Needs Configuration
+│
+├── config
+│   ├── __init__.py
+│   ├── settings            # Needs Configuration
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── production.py
+│   │   └── local.py
+│   ├── wsgi.py             # Needs Configuration
+│   ├── asgi.py             # Needs Configuration
+│   └── urls.py
+│
+├── .gitignore
+├── .dockerignore
+├── manage.py               # Needs Configuration
+├── requirements.txt
+├── Dockerfile
+└── README.md
+
+```
+The project structure outlined above follows a repository pattern. It leverages Django-Ninja as an extension of Django for creating lightweight REST APIs while still utilizing Django’s built-in ORM and maintaining high efficiency.
+
+
+### Model View Template (MVT) + Rest API Architecture
+```bash
+project_name
+├── api
+│   ├── __init__.py
+│   └── v1
+│       ├── admin
+│       │   └── __init__.py
+│       ├── migrations
+│       │   └── __init__.py
+│       ├── models
+│       │   └── __init__.py
+│       ├── permissions
+│       │   └── __init__.py
+│       ├── serializers
+│       │   └── __init__.py
+│       ├── tests
+│       │   └── __init__.py
+│       ├── utils
+│       │   └── __init__.py
+│       └── viewsets
+│           └── __init__.py
+│       ├── __init__.py
+│       ├── urls.py
+│       └── apps.py         # Needs Configuration
+│
+├── app
+│   ├── admin
+│   │   └── __init__.py
+│   ├── models
+│   │   └── __init__.py
+│   ├── tests
+│   │   └── __init__.py
+│   ├── views
+│   │   └── __init__.py
+│   ├── forms
+│   │   └── __init__.py
+│   ├── __init__.py
+│   ├── urls.py
+│   └── apps.py
+│
+├── config
+│   ├── __init__.py
+│   ├── settings            # Needs Configuration
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── production.py
+│   │   └── local.py
+│   ├── wsgi.py             # Needs Configuration
+│   ├── asgi.py             # Needs Configuration
+│   └── urls.py     
+├── static
+│   ├── js/
+│   ├── css/
+│   └── images/
+└── templates
+    └── base.html
+.gitignore
+.dockerignore
+manage.py                   # Needs Configuration
+requirements.txt
+Dockerfile
+README.md
+```
+The project structure outlined above provides a REST framework and follows a Model-View-Template (MVT) architecture. The REST API utilizes the Django Rest Framework (DRF) library, which extends Django’s capabilities for building robust APIs. Additionally, I’ve included the MVT architecture to facilitate user views, allowing developers to incorporate HTML Jinja pages if desired.
+
+> [!NOTE]
+> 
+> To achieve successful migrations and potentially run the code, you’ll need to edit some of the files.
+
+
 ## Installation
 
 To get started with Djangomatic, follow these simple steps:
