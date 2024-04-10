@@ -37,7 +37,7 @@ usage() {
 }
 
 
-init_django() { 
+init_django_rest() { 
     local root_dir="$1"
 
     local venv_path="$root_dir/venv"
