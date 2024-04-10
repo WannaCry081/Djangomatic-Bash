@@ -92,6 +92,11 @@ init_django_rest() {
 }
 
 
+init_django_ninja() {
+    echo "Ninja"
+}
+
+
 
 init_git() {
     echo "Initializing Git..."
