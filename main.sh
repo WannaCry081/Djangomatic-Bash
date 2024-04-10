@@ -125,13 +125,28 @@ init_django() {
         init_django_mvt "$root_dir"
     fi
 
+    cd "$root_dir" || exit 1
     echo "Project setup completed successfully. Happy coding!"
     deactivate
 }
 
 
 init_git() {
-    echo "Initializing Git..."
+    echo "Initializing Git repository..."
+
+    git init 
+    git add . 
+    git commit -m 'Initial commit'
+    git branch -M main
+
+    if [ "$1" = true ]; then
+        echo "Pushing project to the repository..."
+        git remote add origin "$2"
+        git push -u origin main
+    fi
+
+    git checkout -b develop
+    echo "Git operations completed."
 }
 
 
