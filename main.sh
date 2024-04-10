@@ -44,7 +44,7 @@ init_django_mvt() {
 
     local directories=(
         "views" "models" "admin" 
-        "forms" "tests"
+        "forms" "tests" "utils"
     )
 
     django-admin startapp app || exit 1
@@ -78,7 +78,7 @@ init_django_rest() {
 
     local directories=(
         "models" "tests" "admin" "viewsets" 
-        "serializers" "permissions"
+        "serializers" "permissions" "utils"
     )
 
     echo "Initializing Django project..."
@@ -186,6 +186,10 @@ init_django_ninja() {
     deactivate
 }
 
+
+init_django() {
+
+}
 
 
 init_git() {
