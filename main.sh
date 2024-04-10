@@ -38,12 +38,11 @@ usage() {
 
 
 init_django_mvt() {
-    
     local app_path="$1/app"
     local static_path="$1/static"
     local template_path="$1/templates"
 
-    local app_directories=(
+    local directories=(
         "views" "models" "admin" 
         "forms" "tests"
     )
@@ -54,7 +53,7 @@ init_django_mvt() {
     rm "tests.py" "views.py" "admin.py" "models.py" || exit 1
     touch urls.py || exit 1
 
-    for directory in "${app_directories[@]}"; do 
+    for directory in "${directories[@]}"; do 
         mkdir "$app_path/$directory" && cd "$app_path/$directory" || exit 1
         touch "__init__.py" || exit 1
     done
@@ -70,12 +69,12 @@ init_django_mvt() {
 
 
 init_django_rest() { 
-    local root_dir="$1"
+    local root_dir="$(pwd)/$2"
 
     local venv_path="$root_dir/venv"
-    local config_path="$root_dir/config"
     local api_path="$root_dir/api"
     local v1_path="$api_path/v1"
+    local config_path="$root_dir/config"
 
     local directories=(
         "models" "tests" "admin" "viewsets" 
@@ -113,6 +112,7 @@ init_django_rest() {
     django-admin startapp "v1" || exit 1
     cd "$v1_path" || exit 1
     rm "tests.py" "views.py" "admin.py" "models.py" || exit 1
+    touch urls.py || exit 1
 
     for directory in "${directories[@]}"; do 
         mkdir "$v1_path/$directory" && cd "$v1_path/$directory" || exit 1
@@ -120,6 +120,10 @@ init_django_rest() {
     done
 
     cd "$root_dir" || exit 1
+
+    if [ "$1" = true ]; then 
+        init_django_mvt "$root_dir"
+    fi
     deactivate
 }
 
@@ -182,22 +186,22 @@ main() {
                 esac
             done
             
-            if [ "$h_flag" ]; then 
+            if [ "$h_flag" = true ]; then 
                 usage
                 continue
             fi
 
-            if [ "$r_flag" ]; then  
+            if [ "$r_flag" = true ] && [ -n "$project_name" ]; then  
                 init_django_rest "$m_flag" "$project_name"
-                if [ "$g_flag" ] || [ "$p_flag" ]; then 
+                if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
                     init_git "$p_flag" "$repository_link"
                 fi
                 continue
             fi
 
-            if [ "$n_flag" ]; then 
+            if [ "$n_flag" = true ]; then 
                 init_django_ninja "$m_flag" "$project_name"
-                if [ "$g_flag" ] || [ "$p_flag" ]; then 
+                if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
                     init_git "$p_flag" "$repository_link"
                 fi
                 continue
