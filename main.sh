@@ -75,10 +75,9 @@ init_django() {
     local api_path="$root_dir/api"
     local v1_path="$api_path/v1"
     local config_path="$root_dir/config"
+    local directories=($3)
 
-    local directories="$3"
-
-    echo "Initializing Django project..."
+    echo "Initializing Django project. Please wait..."
 
     mkdir -p "$root_dir" && cd "$root_dir" || exit 1
 
@@ -86,7 +85,7 @@ init_django() {
     source "$venv_path/Scripts/activate" || exit 1
 
     pip install django python-dotenv \
-                django-cors-headers "$4" || exit 1
+                django-cors-headers $4 || exit 1
 
     pip freeze > requirements.txt || exit 1
     touch README.md .gitignore .dockerignore Dockerfile || exit 1
@@ -118,6 +117,8 @@ init_django() {
     if [ "$1" = true ]; then 
         init_django_mvt "$root_dir"
     fi
+
+    echo "Project setup completed successfully. Happy coding!"
     deactivate
 }
 
@@ -182,7 +183,7 @@ main() {
             if [ "$r_flag" = true ] && [ -n "$project_name" ]; then  
                 init_django "$m_flag" \
                             "$project_name" \
-                            ("models" "tests" "admin" "viewsets" "serializers" "permissions" "utils") \
+                            "models tests admin viewsets serializers permissions utils" \
                             "djangorestframework djangorestframework-simplejwt drf-yasg"
 
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
@@ -194,8 +195,9 @@ main() {
             if [ "$n_flag" = true ]; then 
                 init_django "$m_flag" \
                             "$project_name" \
-                            ("models" "tests" "admin" "controllers" "services" "repositories" "utils" "exceptions" "schemas") \
-                            "django-ninja-extra"
+                            "models tests admin controllers services repositories utils exceptions schemas" \
+                            "django-ninja-extra" 
+
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
                     init_git "$p_flag" "$repository_link"
                 fi
