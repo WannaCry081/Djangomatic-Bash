@@ -13,7 +13,6 @@ Djangomatic is an interactive command-line project structure generator for Djang
 
 ## Project Structures
 
-
 ### DJango-Ninja Template
 
 ```bash
@@ -140,6 +139,75 @@ The project structure outlined above provides a REST framework and follows a Mod
 > [!NOTE]
 > 
 > To achieve successful migrations and potentially run the code, you’ll need to edit some of the files.
+
+
+## Project Configuration
+
+### Configuration of manage.py, asgi.py, and wsgi.py
+```python 
+# Update manage.py, asgi.py, and wsgi.py 
+import os
+from dotenv import load_env
+
+
+load_env()
+
+settings : str = "config.settings.local"            # Referring to settings/local.py
+if os.environ.get("DJANGO_ENV") != "development":
+    settings = "config.settings.production"         # Referring to settings/production.py
+
+...
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings)
+...
+```
+
+### Configuration of settings directory
+```python 
+# base.py
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+
+INSTALLED_APPS = [
+    ...
+    "api.v1",
+]
+
+# To remove
+DEBUG = True
+
+ALLOWED_HOSTS = []
+```
+
+```python 
+# local.py
+from .base import *
+
+DEBUG = True
+ALLOWED_HOSTS = []
+...
+```
+
+```python 
+# production.py
+from .base import *
+
+DEBUG = False
+ALLOWED_HOSTS = []
+...
+```
+
+### Configuration of apps.py
+```python 
+# apps.py
+class V1Config(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'v1'
+
+    def ready(self):
+        from api.v1.admin import *
+...
+```
 
 
 ## Installation
