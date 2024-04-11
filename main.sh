@@ -90,6 +90,10 @@ init_django_mvt() {
     mkdir "$static_path/js" "$static_path/css" "$static_path/images" || exit 1 
 }
 
+init_api() {
+    
+}
+
 
 # Initialize Django project
 init_django() {
