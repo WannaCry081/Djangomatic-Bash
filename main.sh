@@ -254,8 +254,13 @@ main() {
                 continue
             fi
 
+            if [ -z "$project_name" ]; then 
+                echo "${RED}Error: Missing project name option.${WHITE}"
+                continue
+            fi
+
             # Initialize Django project based on flags
-            if [ "$r_flag" = true ] && [ -n "$project_name" ]; then  
+            if [ "$r_flag" = true ]; then  
                 if [ "$n_flag" = true ]; then
                     echo "${RED}Error: Conflicting options. Use either -r or -n.${WHITE}"
                     continue
@@ -269,7 +274,7 @@ main() {
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
                     init_git "$p_flag" "$repository_link"
                 fi
-                continue
+                continue             
             fi
 
             # Initialize Django Ninja project based on flags
