@@ -60,11 +60,11 @@ usage() {
 
 # Initialize Django project with MVT (Model-View-Template) architecture
 init_django_mvt() {
-    local root_dir="$(pwd)/$1"
+    local root_dir="$(pwd)"
     local venv_dir="$root_dir/venv"
-    local app_dir="$1/app"
-    local static_dir="$1/static"
-    local templates_dir="$1/templates"
+    local app_dir="$root_dir/app"
+    local static_dir="$root_dir/static"
+    local templates_dir="$root_dir/templates"
 
     # Directories to create within the app directory
     local directories=(
@@ -73,7 +73,7 @@ init_django_mvt() {
     )
 
     # Start setup
-    echo -e "${GREEN}Initializing Django MVT app. Please wait...\n${WHITE}"
+    echo -e "${GREEN}Initializing Django MVT app. Please wait...${WHITE}"
 
     # Changing current location to root directory
     cd "$root_dir" || exit 1
@@ -109,7 +109,8 @@ init_django_mvt() {
     deactivate
 
     # Finish setup
-    echo -e "\n${GREEN}MVT app setup completed successfully.${WHITE}"
+    echo -e "${GREEN}MVT app setup completed successfully.${WHITE}"
+    cd "$root_dir" || exit 1
 }
 
 
