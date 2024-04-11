@@ -160,6 +160,51 @@ init_django() {
     deactivate
 }
 
+init_mvt() {
+    
+}
+
+
+# Initialize Django project
+init_django() {
+    local root_dir="$(pwd)/$1"
+    local venv_path="$root_dir/venv"
+    local config_path="$root_dir/config"
+
+    echo -e "${GREEN}Initializing Django project. Please wait...\n${WHITE}"
+
+    # Create project directory
+    mkdir -p "$root_dir" && cd "$root_dir" || exit 1
+
+    # Create virtual environment
+    virtualenv "$venv_path" || exit 1
+    source "$venv_path/Scripts/activate" || exit 1
+
+    # Install required packages
+    pip install django python-dotenv django-cors-headers || exit 1
+
+    # Save installed packages to requirements.txt
+    pip freeze > requirements.txt || exit 1
+
+    # Initialize gitignore file
+    touch README.md .gitignore .dockerignore Dockerfile .env || exit 1
+    echo -e ".env\n*.db\n*.sqlite3\n**/__pycache\n/venv" > .gitignore || exit 1
+
+    # Create Django project
+    django-admin startproject config . || exit 1
+    cd "$config_path" || exit 1
+
+    # Organize Django settings
+    mkdir "settings" && mv settings.py "settings/base.py" || exit 1
+    cd "settings" || exit 1
+    touch "__init__.py" "local.py" "production.py" || exit 1
+
+    # Finish setup
+    cd "$root_dir" || exit 1
+    echo -e "\n${GREEN}Project setup completed successfully. Happy coding!${WHITE}"
+    deactivate
+}
+
 
 # Initialize Git repository and optionally push to a remote repository
 init_git() {
