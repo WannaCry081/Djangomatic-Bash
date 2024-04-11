@@ -55,6 +55,7 @@ project_name
 │   ├── asgi.py             # Needs Configuration
 │   └── urls.py
 │
+├── .env                    # Needs Configuration
 ├── .gitignore
 ├── .dockerignore
 ├── manage.py               # Needs Configuration
@@ -105,7 +106,7 @@ project_name
 │   │   └── __init__.py
 │   ├── __init__.py
 │   ├── urls.py
-│   └── apps.py
+│   └── apps.py             # Needs Configuration
 │
 ├── config
 │   ├── __init__.py
@@ -117,18 +118,22 @@ project_name
 │   ├── wsgi.py             # Needs Configuration
 │   ├── asgi.py             # Needs Configuration
 │   └── urls.py     
+│
 ├── static
 │   ├── js/
 │   ├── css/
 │   └── images/
-└── templates
-    └── base.html
-.gitignore
-.dockerignore
-manage.py                   # Needs Configuration
-requirements.txt
-Dockerfile
-README.md
+│
+├── templates
+│   └── base.html
+│
+├── .env                    # Needs Configuration
+├── .gitignore
+├── .dockerignore
+├── manage.py               # Needs Configuration
+├── requirements.txt
+├── Dockerfile
+└── README.md
 ```
 The project structure outlined above provides a REST framework and follows a Model-View-Template (MVT) architecture. The REST API utilizes the Django Rest Framework (DRF) library, which extends Django’s capabilities for building robust APIs. Additionally, I’ve included the MVT architecture to facilitate user views, allowing developers to incorporate HTML Jinja pages if desired.
 
