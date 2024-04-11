@@ -67,6 +67,7 @@ init_django_mvt() {
         "forms" "tests" "utils"
     )
 
+    # Start setup
     echo -e "${GREEN}Initializing Django MVT app. Please wait...\n${WHITE}"
 
     # Changing current location to root directory
@@ -102,6 +103,7 @@ init_django_mvt() {
     # Deactivate virtual environment
     deactivate
 
+    # Finish setup
     echo -e "\n${GREEN}MVT app setup completed successfully.${WHITE}"
 }
 
