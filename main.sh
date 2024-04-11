@@ -105,30 +105,26 @@ init_django_mvt() {
     echo -e "\n${GREEN}MVT app setup completed successfully.${WHITE}"
 }
 
+init_api() {
+    local root_dir="$(pwd)/$1"
+    local venv_dir="$root_dir/venv"
+    local api_dir="$root_dir/api"
+    local v1_dir="$api_dir/v1"
+    local directories=($2)
 
-# Initialize Django project
-init_django() {
-    local root_dir="$(pwd)/$2"
-    local venv_path="$root_dir/venv"
-    local api_path="$root_dir/api"
-    local v1_path="$api_path/v1"
-    local config_path="$root_dir/config"
-    local directories=($3)
-
+    # Start setup
     echo -e "Initializing Django project. Please wait...\n"
 
-    # Create project directory
-    mkdir -p "$root_dir" && cd "$root_dir" || exit 1
+    # Changing current location to root directory
+    cd "$root_dir" || exit 1
 
-    # Create virtual environment
-    virtualenv "$venv_path" || exit 1
-    source "$venv_path/Scripts/activate" || exit 1
+    # Activating virtual environment
+    source "$venv_dir/Scripts/activate" || exit 1
 
     # Install required packages
-    pip install django python-dotenv \
-                django-cors-headers $4 || exit 1
+    pip install $3 || exit 1
 
-    # Save installed packages to requirements.txt
+    # Update installed packages to requirements.txt
     pip freeze > requirements.txt || exit 1
 
     # Initialize gitignore file
@@ -145,34 +141,24 @@ init_django() {
     touch "__init__.py" "local.py" "production.py" || exit 1
 
     # Create API app and required directories
-    cd "$root_dir" || exit 1
-    mkdir "$api_path" && cd "$api_path" || exit 1
+    mkdir "$api_dir" && cd "$api_dir" || exit 1
     touch "__init__.py" || exit 1
     django-admin startapp "v1" || exit 1
-    cd "$v1_path" || exit 1
+    cd "$v1_dir" || exit 1
     rm "tests.py" "views.py" "admin.py" "models.py" || exit 1
     touch urls.py || exit 1
 
     # Create additional directories within API app
     for directory in "${directories[@]}"; do 
-        mkdir "$v1_path/$directory" && cd "$v1_path/$directory" || exit 1
+        mkdir "$v1_dir/$directory" && cd "$v1_dir/$directory" || exit 1
         touch "__init__.py" || exit 1
     done
 
-    # If MVT architecture is chosen, initialize MVT structure
-    cd "$root_dir" || exit 1
-    if [ "$1" = true ]; then 
-        init_django_mvt "$root_dir"
-    fi
+    # Deactivate virtual environment
+    deactivate
 
     # Finish setup
-    cd "$root_dir" || exit 1
-    echo -e "\n${GREEN}Project setup completed successfully. Happy coding!${WHITE}"
-    deactivate
-}
-
-init_mvt() {
-    
+    echo -e "\n${GREEN}REST API setup completed successfully.${WHITE}"
 }
 
 
