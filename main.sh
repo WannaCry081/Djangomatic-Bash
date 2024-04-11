@@ -24,10 +24,10 @@ usage() {
 		${GREEN} ┃┃ ┃┣━┫┃┗┫┃ ┓┃ ┃${WHITE}┃┃┃┣━┫ ┃ ┃┃  
 		${GREEN}╺┻┛┗┛╹ ╹╹ ╹┗━┛┗━┛${WHITE}╹ ╹╹ ╹ ╹ ╹┗━╸
 
-		Djangomatic v1.0 : Generate django project structure.
+		Djangomatic v2.0 : Generate django project structure.
 		Developed By     : Lirae Que Data (@WannaCry081)
 
-		Usage: django [-h] [-m (optional)] [-m | -r | -n] <project_name> 
+		Usage: django [-h] [-m | -r | -n] <project_name> 
                       [-g | -p (optional)] <repository_link>
 
 		Options:
