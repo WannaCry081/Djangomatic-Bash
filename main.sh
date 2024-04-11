@@ -256,9 +256,13 @@ main() {
             if [ "$h_flag" = true ]; then 
                 usage
                 continue
-            fi
-
-            if [ -z "$project_name" ]; then 
+            elif [ "$r_flag" = true ] && [ "$n_flag" = true ]; then 
+                echo "${RED}Error: Conflicting options. Use either -r or -n.${WHITE}"
+                continue
+            elif [ "$g_flag" = true ] && [ "$p_flag" = true ]; then 
+                echo "${RED}Error: Conflicting options. Use either -g or -p.${WHITE}"
+                continue
+            elif [ -z "$project_name" ]; then 
                 echo "${RED}Error: Missing project name option.${WHITE}"
                 continue
             fi
