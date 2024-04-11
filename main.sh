@@ -55,9 +55,11 @@ usage() {
 
 # Initialize Django project with MVT (Model-View-Template) architecture
 init_django_mvt() {
-    local app_path="$1/app"
-    local static_path="$1/static"
-    local template_path="$1/templates"
+    local root_dir="$(pwd)/$1"
+    local venv_dir="$root_dir/venv"
+    local app_dir="$1/app"
+    local static_dir="$1/static"
+    local templates_dir="$1/templates"
 
     # Directories to create within the app directory
     local directories=(
@@ -65,9 +67,17 @@ init_django_mvt() {
         "forms" "tests" "utils"
     )
 
+    echo -e "${GREEN}Initializing Django MVT app. Please wait...\n${WHITE}"
+
+    # Changing current location to root directory
+    cd "$root_dir" || exit 1
+    
+    # Activating virtual environment
+    source "$venv_dir/Scripts/activate" || exit 1
+    
     # Create Django app and necessary directories
     django-admin startapp app || exit 1
-    cd "$app_path" || exit 1
+    cd "$app_dir" || exit 1
 
     # Remove unnecessary files and create urls.py
     rm "tests.py" "views.py" "admin.py" "models.py" || exit 1
@@ -75,23 +85,24 @@ init_django_mvt() {
 
     # Create required directories and __init__.py files
     for directory in "${directories[@]}"; do 
-        mkdir "$app_path/$directory" && cd "$app_path/$directory" || exit 1
+        mkdir "$app_dir/$directory" && cd "$app_dir/$directory" || exit 1
         touch "__init__.py" || exit 1
     done
 
     # Create template directory and base.html file
-    cd "$app_path" || exit 1
-    mkdir "$template_path" || exit 1
-    touch "$template_path/base.html"
+    cd "$app_dir" || exit 1
+    mkdir "$templates_dir" || exit 1
+    touch "$templates_dir/base.html"
 
     # Create static directories for CSS, JS, and images
-    cd "$app_path" || exit 1
-    mkdir "$static_path" || exit 1
-    mkdir "$static_path/js" "$static_path/css" "$static_path/images" || exit 1 
-}
+    cd "$app_dir" || exit 1
+    mkdir "$static_dir" || exit 1
+    mkdir "$static_dir/js" "$static_dir/css" "$static_dir/images" || exit 1 
 
-init_mvt() {
+    # Deactivate virtual environment
+    deactivate
 
+    echo -e "\n${GREEN}MVT app setup completed successfully.${WHITE}"
 }
 
 
