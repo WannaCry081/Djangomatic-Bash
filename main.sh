@@ -309,9 +309,9 @@ main() {
 
             # Initialize Django project based on flags
             if [ "$r_flag" = true ]; then  
-                init_django_api "$project_name" \
-                                "models tests admin viewsets serializers permissions utils" \
-                                "djangorestframework djangorestframework-simplejwt drf-yasg"
+                init_api "$project_name" \
+                         "models tests admin viewsets serializers permissions utils" \
+                         "djangorestframework djangorestframework-simplejwt drf-yasg"
 
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
                     init_git "$p_flag" "$repository_link"
@@ -321,9 +321,9 @@ main() {
 
             # Initialize Django Ninja project based on flags
             if [ "$n_flag" = true ]; then 
-                init_django_api "$project_name" \
-                                "models tests admin controllers services repositories utils exceptions schemas" \
-                                "django-ninja-extra" 
+                init_api "$project_name" \
+                         "models tests admin controllers services repositories utils exceptions schemas" \
+                         "django-ninja-extra" 
 
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
                     init_git "$p_flag" "$repository_link"
