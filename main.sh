@@ -27,8 +27,8 @@ usage() {
 		Djangomatic v1.0 : Generate django project structure.
 		Developed By     : Lirae Que Data (@WannaCry081)
 
-		Usage: django [-h] [-m (optional)] [-r | -n] [project_name] 
-                      [-g | -p (optional)] [repository_link (optional)]
+		Usage: django [-h] [-m (optional)] [-m | -r | -n] <project_name> 
+                      [-g | -p (optional)] <repository_link>
 
 		Options:
 		   -h	Display the help view
@@ -37,6 +37,7 @@ usage() {
 
 		   -n	Use Django Ninja instead of Django Rest Framework
 		   -r	Utilize REST API for the project template
+
 		   -g	Initialize version control
 		   -p	Push the project to a public repository
 
@@ -44,9 +45,13 @@ usage() {
 
     cat <<- EOF
 		Examples: 
-		    django -r note-app          Creates a django Rest API template
-		    django -m -n ecommerce -g   Creates a django MVT + Ninja and initialize git
-		    django -r todolist -p link  Creates a django Rest API and push it to GitHub
+		    django -m todo-list
+		    django -r todo-list          
+		    django -n todo-list -g        
+		    django -n todo-list -p https://github.com/sample/
+
+		    django -m -n todo-list -g 
+		    django -m -r todo-list -p https://github.com/sample/
 
 
 	EOF
