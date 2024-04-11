@@ -131,19 +131,6 @@ init_django_api() {
     # Update installed packages to requirements.txt
     pip freeze > requirements.txt || exit 1
 
-    # Initialize gitignore file
-    touch README.md .gitignore .dockerignore Dockerfile .env || exit 1
-    echo -e ".env\n*.db\n*.sqlite3\n**/__pycache\n/venv" > .gitignore || exit 1
-
-    # Create Django project
-    django-admin startproject config . || exit 1
-    cd "$config_path" || exit 1
-
-    # Organize Django settings
-    mkdir "settings" && mv settings.py "settings/base.py" || exit 1
-    cd "settings" || exit 1
-    touch "__init__.py" "local.py" "production.py" || exit 1
-
     # Create API app and required directories
     mkdir "$api_dir" && cd "$api_dir" || exit 1
     touch "__init__.py" || exit 1
