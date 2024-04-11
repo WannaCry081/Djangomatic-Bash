@@ -233,6 +233,7 @@ init_git() {
 
 # Main function to handle Djangomatic commands and operations
 main() {
+    local root_dir="$(pwd)"
     local h_flag=false
     local m_flag=false
     local n_flag=false
@@ -247,6 +248,8 @@ main() {
 
     # Loop to continuously process user input
     while [ true ]; do
+
+        cd "$root_dir" || exit 1
 
         unset h_flag
         unset m_flag
@@ -312,13 +315,12 @@ main() {
             init_django "$project_name"
 
             if [ "$m_flag" = true ]; then 
-                init_django_mvt "$project_name"
+                init_django_mvt
             fi 
 
             # Initialize Django project based on flags
             if [ "$r_flag" = true ]; then  
-                init_django_api "$project_name" \
-                                "models tests admin viewsets serializers permissions utils" \
+                init_django_api "models tests admin viewsets serializers permissions utils" \
                                 "djangorestframework djangorestframework-simplejwt drf-yasg"
 
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
@@ -329,8 +331,7 @@ main() {
 
             # Initialize Django Ninja project based on flags
             if [ "$n_flag" = true ]; then 
-                init_django_api "$project_name" \
-                                "models tests admin controllers services repositories utils exceptions schemas" \
+                init_django_api "models tests admin controllers services repositories utils exceptions schemas" \
                                 "django-ninja-extra" 
 
                 if [ "$g_flag" = true ] || [ "$p_flag" = true ]; then 
