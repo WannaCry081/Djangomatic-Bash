@@ -199,6 +199,7 @@ init_django() {
 
     # Finish setup
     echo -e "\n${GREEN}Project setup completed successfully.${WHITE}"
+    cd "$root_dir" || exit 1
 }
 
 
