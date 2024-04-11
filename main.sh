@@ -122,7 +122,7 @@ init_django_api() {
     local directories=($2)
 
     # Start setup
-    echo -e "Initializing Django project. Please wait...\n"
+    echo -e "${GREEN}Initializing Django MVT app. Please wait...\n${WHITE}"
 
     # Changing current location to root directory
     cd "$root_dir" || exit 1
@@ -202,7 +202,7 @@ init_django() {
 
 # Initialize Git repository and optionally push to a remote repository
 init_git() {
-    echo -e "Initializing Git repository...\n"
+    echo -e "${GREEN}Initializing Git repository...${WHITE}\n"
 
     # Initialize local Git repository
     git init 
