@@ -105,7 +105,9 @@ init_django_mvt() {
     echo -e "\n${GREEN}MVT app setup completed successfully.${WHITE}"
 }
 
-init_api() {
+
+# Initialize Django project with Rest API architecture
+init_django_api() {
     local root_dir="$(pwd)/$1"
     local venv_dir="$root_dir/venv"
     local api_dir="$root_dir/api"
