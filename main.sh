@@ -45,13 +45,17 @@ usage() {
 
     cat <<- EOF
 		Examples: 
-		    django -m todo-list
-		    django -r todo-list          
-		    django -n todo-list -g        
-		    django -n todo-list -p https://github.com/sample/
+		    django todo-list            Create a django project template
+		    django -m todo-list         Create a django MVT template
+		    django -r todo-list         Create a Rest API template
+		    django -n todo-list -g      Create a Rest API Django-Ninja template
+		                                and add version control
 
-		    django -m -n todo-list -g 
-		    django -m -r todo-list -p https://github.com/sample/
+		    django -m -r todo-list -g   Create a MVT and Rest API template 
+		                                and add version control
+
+		    django -n todo-list -p https://github.com/sample/
+		    django -m -n todo-list -p https://github.com/sample/
 
 
 	EOF
