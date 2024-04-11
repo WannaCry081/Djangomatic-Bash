@@ -168,8 +168,8 @@ init_mvt() {
 # Initialize Django project
 init_django() {
     local root_dir="$(pwd)/$1"
-    local venv_path="$root_dir/venv"
-    local config_path="$root_dir/config"
+    local venv_dir="$root_dir/venv"
+    local config_dir="$root_dir/config"
 
     echo -e "${GREEN}Initializing Django project. Please wait...\n${WHITE}"
 
@@ -177,8 +177,8 @@ init_django() {
     mkdir -p "$root_dir" && cd "$root_dir" || exit 1
 
     # Create virtual environment
-    virtualenv "$venv_path" || exit 1
-    source "$venv_path/Scripts/activate" || exit 1
+    virtualenv "$venv_dir" || exit 1
+    source "$venv_dir/Scripts/activate" || exit 1
 
     # Install required packages
     pip install django python-dotenv django-cors-headers || exit 1
@@ -192,17 +192,18 @@ init_django() {
 
     # Create Django project
     django-admin startproject config . || exit 1
-    cd "$config_path" || exit 1
+    cd "$config_dir" || exit 1
 
     # Organize Django settings
     mkdir "settings" && mv settings.py "settings/base.py" || exit 1
     cd "settings" || exit 1
     touch "__init__.py" "local.py" "production.py" || exit 1
 
-    # Finish setup
-    cd "$root_dir" || exit 1
-    echo -e "\n${GREEN}Project setup completed successfully. Happy coding!${WHITE}"
+    # Deactivate virtual environment
     deactivate
+
+    # Finish setup
+    echo -e "\n${GREEN}Project setup completed successfully.${WHITE}"
 }
 
 
