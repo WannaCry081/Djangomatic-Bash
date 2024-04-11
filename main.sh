@@ -116,14 +116,14 @@ init_django_mvt() {
 
 # Initialize Django project with Rest API architecture
 init_django_api() {
-    local root_dir="$(pwd)/$1"
+    local root_dir="$(pwd)"
     local venv_dir="$root_dir/venv"
     local api_dir="$root_dir/api"
     local v1_dir="$api_dir/v1"
-    local directories=($2)
+    local directories=($1)
 
     # Start setup
-    echo -e "Initializing Django project. Please wait...\n"
+    echo -e "${GREEN}Initializing Django project. Please wait...${WHITE}\n"
 
     # Changing current location to root directory
     cd "$root_dir" || exit 1
@@ -132,7 +132,7 @@ init_django_api() {
     source "$venv_dir/Scripts/activate" || exit 1
 
     # Install required packages
-    pip install $3 || exit 1
+    pip install $2 || exit 1
 
     # Update installed packages to requirements.txt
     pip freeze > requirements.txt || exit 1
@@ -156,6 +156,7 @@ init_django_api() {
 
     # Finish setup
     echo -e "\n${GREEN}REST API setup completed successfully.${WHITE}"
+    cd "$root_dir" || exit 1
 }
 
 
