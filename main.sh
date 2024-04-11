@@ -117,8 +117,8 @@ init_django() {
     pip freeze > requirements.txt || exit 1
 
     # Initialize gitignore file
-    touch README.md .gitignore .dockerignore Dockerfile || exit 1
-    echo -e "*.db\n*.sqlite3\n**/__pycache\n/venv" > .gitignore || exit 1
+    touch README.md .gitignore .dockerignore Dockerfile .env || exit 1
+    echo -e ".env\n*.db\n*.sqlite3\n**/__pycache\n/venv" > .gitignore || exit 1
 
     # Create Django project
     django-admin startproject config . || exit 1
